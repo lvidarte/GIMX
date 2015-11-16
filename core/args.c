@@ -389,6 +389,10 @@ int args_read(int argc, char *argv[], s_gimx_params* params)
         {
           adapter_get(controller)->ctype = C_TYPE_G29_PS4;
         }
+        else if (!strcmp(optarg, "G920_XONE"))
+        {
+          adapter_get(controller)->ctype = C_TYPE_G920_XONE;
+        }
         else
         {
           fprintf(stderr, "Bad controller type: %s\n", optarg);

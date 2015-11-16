@@ -267,6 +267,42 @@ static struct
         .size = XONE_USB_INTERRUPT_PACKET_SIZE
       }
     }
+  },
+  [C_TYPE_G920_XONE] =
+  {
+    .name = XONE_NAME,
+    .vendor = XONE_VENDOR,
+    .product = XONE_PRODUCT,
+    .configuration = 1,
+    .interface = 0,
+    .endpoints =
+    {
+      .in =
+      {
+        .address = XONE_USB_INTERRUPT_ENDPOINT_IN | LIBUSB_ENDPOINT_IN,
+        .size = XONE_USB_INTERRUPT_PACKET_SIZE,
+        .reports =
+        {
+          .nb = 2,
+          .elements =
+          {
+            {
+              .report_id = XONE_USB_HID_IN_REPORT_ID,
+              .report_length = sizeof(((s_report_xone*)NULL)->input)
+            },
+            {
+              .report_id = XONE_USB_HID_IN_GUIDE_REPORT_ID,
+              .report_length = sizeof(((s_report_xone*)NULL)->guide)
+            },
+          }
+        }
+      },
+      .out =
+      {
+        .address = XONE_USB_INTERRUPT_ENDPOINT_OUT | LIBUSB_ENDPOINT_OUT,
+        .size = XONE_USB_INTERRUPT_PACKET_SIZE
+      }
+    }
   }
 };
 

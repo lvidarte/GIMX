@@ -277,7 +277,7 @@ int adapter_get_controller(e_device_type device_type, int device_id)
   return device_adapter[device_type-1][device_id];
 }
 
-static int debug = 0;
+static int debug = 1;
 
 static void dump(unsigned char* packet, unsigned char length)
 {
@@ -803,6 +803,7 @@ int adapter_detect()
                   break;
                 case C_TYPE_XONE_PAD:
                 case C_TYPE_360_PAD:
+                case C_TYPE_G920_XONE:
                   if(status == BYTE_STATUS_SPOOFED)
                   {
                     adapter->status = 1;
@@ -838,7 +839,8 @@ int adapter_detect()
               if(usb_res < 0)
               {
                 if((adapter->ctype != C_TYPE_360_PAD
-                    && adapter->ctype != C_TYPE_XONE_PAD)
+                    && adapter->ctype != C_TYPE_XONE_PAD
+                    && adapter->ctype != C_TYPE_G920_XONE)
                     || status != BYTE_STATUS_SPOOFED)
                 {
                   fprintf(stderr, _("No controller was found on USB buses.\n"));
@@ -1182,6 +1184,7 @@ void adapter_clean()
           case C_TYPE_T300RS_PS4:
           case C_TYPE_G29_PS4:
           case C_TYPE_G27_PS3:
+          case C_TYPE_G920_XONE:
             usb_close(i);
             adapter_send_reset(i);
             break;

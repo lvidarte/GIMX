@@ -70,7 +70,7 @@ void mainloop()
 
     if(wait)
     {
-      gpoll();
+      gpoll(); // Second call for the second adapter
       gprintf("waiting %ds for connection\n", wait_sec);
       sleep(wait_sec);
       wait = 0;

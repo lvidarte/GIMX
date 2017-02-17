@@ -1,16 +1,13 @@
 #!/bin/bash
 
+CONFIG_FILE="ps3-dual.xml"
+HOST_MAC="90:34:FC:DF:8A:E6"
+
 ADAPTER_1_HCI=1
 ADAPTER_1_MAC="08:A9:5A:26:3B:51"
 
 ADAPTER_2_HCI=2
 ADAPTER_2_MAC="34:C7:31:9C:9D:4E"
-
-GIMX_CONFIG="ps3-dual.xml"
-
-HOST_MAC="90:34:FC:DF:8A:E6"
-
-LOG="gimx.log"
 
 
 # Set MAC for the bluetooth adapter
@@ -34,9 +31,7 @@ set_adapter_mac $ADAPTER_1_HCI $ADAPTER_1_MAC
 set_adapter_mac $ADAPTER_2_HCI $ADAPTER_2_MAC
 
 
-echo "Launching gimx, logging on $LOG"
-
-gimx --status --nograb --config $GIMX_CONFIG \
+gimx --status --nograb --config $CONFIG_FILE \
      --type Sixaxis --hci $ADAPTER_1_HCI --bdaddr $HOST_MAC \
      --type Sixaxis --hci $ADAPTER_2_HCI --bdaddr $HOST_MAC \
      "$@"
